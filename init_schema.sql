@@ -14,6 +14,7 @@
 # * surname [```NOT NULL```, ```VARCHAR```] - фамилия человека
 # * birth_date [```NOT NULL```, ```DATETIME```] - дата рождения человека
 
+
 DROP DATABASE IF EXISTS film_zone;
 CREATE DATABASE film_zone;
 USE film_zone;
@@ -33,6 +34,15 @@ CREATE TABLE persons (
 
 # * USER - User
 # * ADMIN - Administrator
+
+
+CREATE TABLE user_types (
+    id VARCHAR(50) NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+INSERT INTO user_types(id, name) VALUES ('USER', 'User');
+INSERT INTO user_types(id, name) VALUES ('ADMIN', 'Administrator');
 
 # **users** - таблица "пользователи"
 
