@@ -71,6 +71,16 @@ CREATE TABLE users (
 # * email ```[NOT NULL```, ```VARCHAR```] - email пользователя
 # * user_login [```NOT NULL```, ```VARCHAR```, ```REFERENCES users(login)```] - логин пользователя
 
+
+CREATE TABLE email (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(50) NOT NULL,
+    user_login VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_email_users FOREIGN KEY (user_login)
+        REFERENCES users (login)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # **genres** - таблица "жанры фильмов"
 
 # * id [```NOT NULL```, ```VARCHAR```, ```PRIMARY KEY```] - уникальный идентификатор жанра фильма
