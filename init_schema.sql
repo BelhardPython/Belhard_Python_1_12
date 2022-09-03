@@ -140,10 +140,35 @@ INSERT INTO genres(id, name) VALUES ('DOCUMENTARY', 'Documentary');
 # * rating [```NOT NULL```, ```FLOAT```] - рейтинг фильма
 # * director_id [```NOT NULL```, ```INT```, ```REFERENCES persons(id)```] - режиссер фильма
 
+
+CREATE TABLE films (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    duration INT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    realese_date DATETIME NOT NULL,
+    rating FLOAT NOT NULL,
+    director_id INT NOT NULL,
+    CONSTRAINT fk_films_presons FOREIGN KEY (director_id)
+        REFERENCES persons (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # **user_favorite_films** - MM связь "любимые фильмы пользователя"
 
 # * user_login [```NOT NULL```, ```VARCHAR```, ```REFERENCES users(login)```] - логин пользователя
 # * film_id [```NOT NULL```, ```INT```, ```REFERENCES films(id)```] - id фильма
+
+
+CREATE TABLE user_favorite_films (
+    user_login VARCHAR(50) NOT NULL,
+    film_id INT NOT NULL,
+    CONSTRAINT fk_user_favorite_films_users FOREIGN KEY (user_login)
+        REFERENCES users (login)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_user_favorite_films_films FOREIGN KEY (film_id)
+        REFERENCES films (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 # **films_genres** - MM связь "жанры фильмов"
 
