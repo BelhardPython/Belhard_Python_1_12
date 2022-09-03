@@ -106,6 +106,31 @@ CREATE TABLE email (
 # * THRILLER - Thriller
 # * DOCUMENTARY - Documentary
 
+
+CREATE TABLE genres (
+    id VARCHAR(50) NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+INSERT INTO genres(id, name) VALUES ('ACTION', 'Action');
+INSERT INTO genres(id, name) VALUES ('ADVENTURE', 'Adventure');
+INSERT INTO genres(id, name) VALUES ('COMEDY', 'Comedy');
+INSERT INTO genres(id, name) VALUES ('DRAMA', 'Drama');
+INSERT INTO genres(id, name) VALUES ('CRIME', 'Crime');
+INSERT INTO genres(id, name) VALUES ('SCI_FI', 'sci-fi');
+INSERT INTO genres(id, name) VALUES ('FANTASY', 'Fantasy');
+INSERT INTO genres(id, name) VALUES ('MUSICAL', 'Musical');
+INSERT INTO genres(id, name) VALUES ('WESTERN', 'Western');
+INSERT INTO genres(id, name) VALUES ('POST_APOCALYPTIC', 'Post-apocalyptic');
+INSERT INTO genres(id, name) VALUES ('WAR', 'War');
+INSERT INTO genres(id, name) VALUES ('FAMILY', 'Family_film');
+INSERT INTO genres(id, name) VALUES ('LOVE', 'Love_story');
+INSERT INTO genres(id, name) VALUES ('CARTOON', 'Cartoon');
+INSERT INTO genres(id, name) VALUES ('HORROR', 'Horror');
+INSERT INTO genres(id, name) VALUES ('THRILLER', 'Thriller');
+INSERT INTO genres(id, name) VALUES ('DOCUMENTARY', 'Documentary');
+
+
 # **films** - таблица "фильмы""
 
 # * id [```NOT NULL```, ```INT```, ```PRIMARY KEY```, ```AUTOINCREMENT```] - уникальный идентификатор фильма
