@@ -51,6 +51,20 @@ INSERT INTO user_types(id, name) VALUES ('ADMIN', 'Administrator');
 # * user_type_id [```NOT NULL```, ```VARCHAR```, ```REFERENCES user_types(id)```] - тип пользователя
 # * person_id [```NOT NULL```, ```INT```, ```REFERENCES persons(id)```] - данные пользователя
 
+
+CREATE TABLE users (
+    login VARCHAR(50) NOT NULL PRIMARY KEY,
+    password VARCHAR(50) NOT NULL,
+    user_type_id VARCHAR(50) NOT NULL,
+    person_id INT NOT NULL,
+    CONSTRAINT fk_users_user_types FOREIGN KEY (user_type_id)
+        REFERENCES user_types (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_users_persons FOREIGN KEY (person_id)
+        REFERENCES persons (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # **emails** - таблица "emailы пользователей"
 
 # * id [```NOT NULL```, ```INT```, ```PRIMARY KEY```, ```AUTOINCREMENT```] - уникальный идентификатор email
