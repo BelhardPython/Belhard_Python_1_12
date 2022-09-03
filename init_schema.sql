@@ -175,6 +175,18 @@ CREATE TABLE user_favorite_films (
 # * film_id [```NOT NULL```, ```INT```, ```REFERENCES films(id)```] - id фильма
 # * film_genre_id [```NOT NULL```, ```VARCHAR```, ```REFERENCES genres(id)```] - id жанра
 
+
+CREATE TABLE films_genres (
+    film_id INT NOT NULL,
+    film_genre_id VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_film_genres_films FOREIGN KEY (film_id)
+        REFERENCES films (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_film_genres_genres FOREIGN KEY (film_genre_id)
+        REFERENCES genres (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # **characters** - таблица "персонажи фильмов"
 
 # * id [```NOT NULL```, ```INT```, ```PRIMARY KEY```, ```AUTOINCREMENT```] - уникальный идентификатор персонажа
@@ -182,10 +194,33 @@ CREATE TABLE user_favorite_films (
 # * comment [```VARCHAR```] - комментарий
 # * film_id [```NOT NULL```, ```INT```, ```REFERENCES films(id)```] - id фильма
 
+
+CREATE TABLE characters (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    comment VARCHAR(50),
+    film_id INT NOT NULL,
+    CONSTRAINT fk_characters_films FOREIGN KEY (film_id)
+        REFERENCES films (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # **characters_actors** - MM связь "актеры, играющие персонажей"
 
 # * character_id [```NOT NULL```, ```INT```, ```REFERENCES characters(id)```] - id персонажа
 # * person_id [```NOT NULL```, ```INT```, ```REFERENCES persons(id)```] - id человека
+
+
+CREATE TABLE characters_actors (
+    character_id INT NOT NULL,
+    person_id INT NOT NULL,
+    CONSTRAINT fk_characters_actors_characters FOREIGN KEY (character_id)
+        REFERENCES characters (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_characters_actors_persons FOREIGN KEY (person_id)
+        REFERENCES persons (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 
 # ***
