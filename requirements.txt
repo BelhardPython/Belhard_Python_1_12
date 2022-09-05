@@ -3,3 +3,5 @@ flake8
 flake8-builtins
 flake8-isort
 pymysql
+
+SQLAlchemy~=1.4.40
