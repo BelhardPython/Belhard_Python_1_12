@@ -1,18 +1,36 @@
-from db.session import Session
-from db.tables import tables
-
+from db import Session
+from db.tables.genres import Genres
+from db.tables.persons import Persons
 
 with Session() as db_session:
-    new_person = tables.Persons(name='Emi', surname='Dobrian', birth_date='22/07/1999')
-    db_session.add(new_person)
+
+    my_genres = db_session.query(Genres).filter(Genres.name.like('A%'))
+    for genres in my_genres:
+        print(genres.name)
+
+    new_persons = Persons(
+        id=1,
+        name='Aleksei',
+        surname='Konyshev',
+        birth_date='1976-06-02'
+    )
+    db_session.add(new_persons)
     db_session.commit()
 
-    my_user = db_session.query(tables.Persons).filter(tables.Persons.id == 1).first()
-    db_session.delete(my_user)
+    person_for_delete = Persons(
+        id=2,
+        name='Mark',
+        surname='Myskov',
+        birth_date='2004-08-12'
+    )
+    db_session.add(person_for_delete)
     db_session.commit()
 
-    my_user = db_session.query(tables.Persons).filter(tables.Persons.id == 2).first()
+    my_chenges = db_session.query(Persons).filter(Persons.id == 1)
+    my_chenges.update({Persons.surname: 'Redactor'})
 
-    change_user = db_session.query(tables.Persons).filter(tables.Persons.id == 1).first()
-    change_user.name = 'New'
+    db_session.commit()
+
+    del_person = db_session.query(Persons).filter(Persons.id == 2).first()
+    db_session.delete(del_person)
     db_session.commit()
